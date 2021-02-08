@@ -10,6 +10,14 @@ var connection = mysql.createConnection({
   host: "localhost",
   port: "root",
   password: "",
-  database: "top_songsDB"
+  database: "employeeTracker_DB"
 
 });
+
+// connect to mysql server and aql database
+
+connection.connect(function(err) {
+  if (err) throw err;
+
+  
+})
