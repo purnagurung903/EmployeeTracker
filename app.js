@@ -45,7 +45,7 @@ function start(){
     }
   ])// response to the action 
     .then(function(answer){
-      if (answer.action === "Add employer"){
+      if (answer.action === "Add employee"){
         addEmployee();
       }else if(answer.action === "Add department"){
         addDepartment()
@@ -83,7 +83,7 @@ function addEmployee() {
       {
         name: "role_id",
         type: "number",
-        message: "Type employee role",
+        message: "Type employee role id",
       },
       {
         name: "manager_id",
@@ -100,7 +100,7 @@ function addEmployee() {
         first_name: answer.first_name,
         last_name: answer.last_name,
         role_id: answer.role_id,
-        manager_id: answer.manager_id,
+        manager_id: answer.manager_id
 
 
       },
@@ -115,7 +115,27 @@ function addEmployee() {
 }
 
 function addDepartment(){
-  
+  inquirer
+   .prompt({
+     name: "department",
+     typr: "input",
+     message: "Add a department",
+   })
+   .then(function (answer){
+     connection.query(
+       "INSERT INTO department (name) VALUES (?)",
+       answer.department,
+       function (err) {
+         if (err) throw err;
+         console.log(answer.department);
+         start();
+       }
+     )
+   })
+}
+
+function addRole(){
+
 }
         
        
