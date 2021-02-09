@@ -118,7 +118,7 @@ function addDepartment(){
   inquirer
    .prompt({
      name: "department",
-     typr: "input",
+     type: "input",
      message: "Add a department",
    })
    .then(function (answer){
@@ -135,6 +135,41 @@ function addDepartment(){
 }
 
 function addRole(){
+  inquirer
+    .prompt([
+      {
+      name: "title",
+      type: "input",
+      message: "What is the title of the role?",
+
+
+    },
+    {
+      name: "salary",
+      type: "number",
+      message: "How much is the salary?",
+    },
+    {
+      name: "department_id",
+      type: "number",
+      message: "What is department id?",
+    },
+  ])
+  .then(function(answer){
+    connection.query(
+      "INSERT INTO roles SET ?",
+      {
+        title: answer.title,
+        salary: answer.salary,
+        department_id: answer.department_id,
+      },
+      function (err) {
+        if (err) throw err;
+        console.log("the role is created");
+
+      }
+    )
+  })
 
 }
         
