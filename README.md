@@ -3,6 +3,7 @@
 This app allows the user to add, view, update and delete department, roles and employee information to keep track of a company's teams. It is a Content Management System that uses inquirer to get information from the user to MySQL. The user can create departments and roles with corresponding department and salary information, enter new employee names and titles, and have the data from the three SQL tables displayed through different joins.
 
 Github Repo: https://github.com/purnagurung903/EmployeeTracker.git
+demo video: https://drive.google.com/file/d/1djcQsRwpAhZjFOzyiJZgN07oRqq0PWM0/view
 
 ## TABLE OF CONTENTS
 * [Installation](#installation)
