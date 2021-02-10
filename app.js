@@ -166,12 +166,68 @@ function addRole(){
       function (err) {
         if (err) throw err;
         console.log("the role is created");
+        
+        start();
 
       }
     )
   })
 
 }
+
+function myView(){
+  inquirer
+   .prompt({
+     name: "view",
+     type: "list",
+     message: "What would you like to view?",
+     choices: ["Department", "Roles", "Employees", "Exit"],
+
+   })
+   .then(function (answer){
+     switch (answer.view) {
+       case "Department":
+         viewDepartment();
+         break;
+        case "Roles":
+          viewRoles();
+          break;
+        case "Employees":
+          viewEmployee();
+          break;
+        case "Exit":
+          connection.end();
+          break;
+     }
+   });
+}
+
+function viewDepartment(){
+  connection.query("SELECT * FROM department", function (err, results){
+    if (err) throw err;
+    console.table(results);
+    start();
+  });
+}
+
+function viewRoles() {
+  connection.query("SELECT roles.id, title, salary, department.name AS department FROM roles LEFT JOIN department 0N roles.department_id = department.id", function (err, results){
+    if (err) throw err;
+    console.table(results)
+    start();
+  })
+}
+
+function viewEmployee(){
+  connection.query("SELECT employee.id, first_name, last_name, roles.title AS roles  FROM employee LEFT JOIN roles ON employee.role_id = roles.id", function (err, results){
+    if (err) throw err;
+    console.table(results)
+
+    start();
+  })
+}
+
+
         
        
 
