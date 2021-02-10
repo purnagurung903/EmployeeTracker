@@ -219,7 +219,8 @@ function viewRoles() {
 }
 
 function viewEmployee(){
-  connection.query("SELECT employee.id, first_name, last_name, roles.title AS roles  FROM employee LEFT JOIN roles ON employee.role_id = roles.id", function (err, results){
+  connection.query("SELECT employee.id, first_name, last_name, roles.title AS roles  FROM employee LEFT JOIN roles ON employee.role_id = roles.id" 
+  , function (err, results){
     if (err) throw err;
     console.table(results)
 
@@ -229,34 +230,29 @@ function viewEmployee(){
 
 function myUpdate(){
   inquirer
-   .prompt({
-     name: "update",
-     type: "list",
-     message: "What do you want to update?",
-     choices: ["Department", "Roles", "Employees", "Exit"],
-   })
-   .then(function (answer) {
-     switch (answer.update){
-       case "Department":
-         updateDepartment();
-         break;
+    .prompt({
+      name: "update",
+      type: "list",
+      message: "What would you like to update?",
+      choices: ["Department", "Roles", "Employees", "Exit"],
+    })
+    .then(function (answer) {
+      switch (answer.update) {
+        case "Department":
+          updateDepartment();
+          break;
+
         case "Roles":
           updateRoles();
           break;
+
         case "Employees":
-          updateEmployees();
+          updateEmployee();
           break;
+
         case "Exit":
           connection.end();
           break;
-     }
-   });
+      }
+    });
 }
-        
-       
-
-        
-
-
-      
-    
