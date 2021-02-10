@@ -211,7 +211,7 @@ function viewDepartment(){
 }
 
 function viewRoles() {
-  connection.query("SELECT roles.id, title, salary, department.name AS department FROM roles LEFT JOIN department 0N roles.department_id = department.id", function (err, results){
+  connection.query("SELECT roles.id, title, salary, department.name AS department  FROM roles LEFT JOIN department ON roles.department_id = department.id", function (err, results){
     if (err) throw err;
     console.table(results)
     start();
@@ -227,7 +227,31 @@ function viewEmployee(){
   })
 }
 
-
+function myUpdate(){
+  inquirer
+   .prompt({
+     name: "update",
+     type: "list",
+     message: "What do you want to update?",
+     choices: ["Department", "Roles", "Employees", "Exit"],
+   })
+   .then(function (answer) {
+     switch (answer.update){
+       case "Department":
+         updateDepartment();
+         break;
+        case "Roles":
+          updateRoles();
+          break;
+        case "Employees":
+          updateEmployees();
+          break;
+        case "Exit":
+          connection.end();
+          break;
+     }
+   });
+}
         
        
 
