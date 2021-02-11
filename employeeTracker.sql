@@ -47,4 +47,8 @@ INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("Peter
 
 SELECT employee.id, first_name, last_name, roles.title AS roles  FROM employee LEFT JOIN roles ON employee.role_id = roles.id;
 
+UPDATE department
+SET name = "laundry", 
+WHERE id = 3;
 
+SELECT * FROM department;

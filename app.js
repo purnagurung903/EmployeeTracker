@@ -256,3 +256,62 @@ function myUpdate(){
       }
     });
 }
+function updateDepartment(){
+  connection.query("SELECT * FROM department", function (err, results){
+    if (err) throw err;
+    console.table(results);
+    
+  
+
+
+  inquirer
+   .prompt([
+     {
+
+      name: "department",
+      type: "input",
+       message: "choose department to update",
+       choices: function(results){
+         var updateDep = [];
+         for (var i=0; i<results.length;i++){
+           updateDep.push(results[i].department)
+         }
+         return updateDep
+       }
+     },
+     {
+       name: "newdepartment",
+       type: "id",
+       message: "Enter new department",
+
+
+     }
+    ])
+
+    .then(function(res){
+      connection.query("UPDATE department SET ? WHERE ?",
+      {
+        department: res.newdepartment,
+        id: res.id
+      },
+      function(err){
+        if (err) throw err;
+        console.table(response);
+        console.log("Update successfull")
+        start()
+      }
+      )
+    })
+
+  
+});
+}
+  
+    
+
+      
+         
+      
+      
+ 
+
