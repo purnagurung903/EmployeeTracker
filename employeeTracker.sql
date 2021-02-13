@@ -51,4 +51,4 @@ UPDATE department
 SET name = "laundry", 
 WHERE id = 3;
 
-SELECT * FROM department;
+SELECT department.id, name FROM department;

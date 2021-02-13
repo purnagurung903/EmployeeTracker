@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
   user: "root",
-  password: "7Angelpa",
+  password: "",
   database: "employeeTracker_DB"
 
 });
@@ -257,7 +257,7 @@ function myUpdate(){
     });
 }
 function updateDepartment(){
-  connection.query("SELECT * FROM department", function (err, results){
+  connection.query("SELECT roles.id, title, salary, department.name AS department  FROM roles LEFT JOIN department ON roles.department_id = department.id;", function (err, results){
     if (err) throw err;
     console.table(results);
     
@@ -281,22 +281,32 @@ function updateDepartment(){
      },
      {
        name: "newdepartment",
-       type: "id",
+       type: "input",
        message: "Enter new department",
 
 
-     }
+     },
+     {
+       name: "newid",
+     type: "id",
+     message: "Enter department id to update"
+    }
     ])
 
     .then(function(res){
+      
       connection.query("UPDATE department SET ? WHERE ?",
-      {
-        department: res.newdepartment,
-        id: res.id
+      [{
+        department: res.newdepartment
+        
       },
+      {
+        id: res.newid
+      },
+    ],
       function(err){
         if (err) throw err;
-        console.table(response);
+        console.table(res);
         console.log("Update successfull")
         start()
       }
